@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "plane.h"
 #include "vertex.h"
 
 struct Mesh
@@ -16,7 +17,7 @@ struct Mesh
         Mesh() = default;
 
         // parameterised constructor
-        Mesh(const std::vector<Vertex> v, const std::vector<Vertex> f) : v(v), f(f) {}
+        Mesh(const std::vector<Vertex>& v, const std::vector<Vertex>& f) : v(v), f(f) {}
 
         // copy constructor (implicitly defined)
         Mesh(const Mesh&) = default;
@@ -36,7 +37,7 @@ void Mesh::load(std::ifstream& in)
                         for(std::size_t i = 0; i < 3; ++i)
                         {       std::string str;
                                 iss >> str;
-                                vertex.arr.at(i) = stod(str);
+                                vertex.coordinates.at(i) = stod(str);
                         }
                         v.push_back(vertex);
                 }
@@ -46,7 +47,7 @@ void Mesh::load(std::ifstream& in)
                         for(std::size_t i = 0; i < 3; ++i)
                         {       std::string str;
                                 iss >> str;
-                                vertex.arr.at(i) = stod(str);
+                                vertex.coordinates.at(i) = stod(str);
                         }
                         f.push_back(vertex);
                 }

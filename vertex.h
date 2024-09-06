@@ -4,13 +4,13 @@
 #include <array>
 
 struct Vertex
-{       std::array<double, 3> arr;
+{       std::array<double, 3> coordinates;
 
         // default constructor (implicitly defined)
         Vertex() = default;
 
         // parameterised constructor
-        Vertex(const double x1, const double x2, const double x3) : arr{x1, x2, x3} {}
+        Vertex(const double x, const double y, const double z) : coordinates{x, y, z} {}
 
         // copy constructor (implicitly defined)
         Vertex(const Vertex&) = default;
