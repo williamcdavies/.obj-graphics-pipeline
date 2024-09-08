@@ -4,18 +4,18 @@
 #include "mesh.h"
 
 double bind(const Mesh& mesh)
-{       double s = 0;
+{       double r = 0;
         for(std::size_t i = 0; i < mesh.v.size(); ++i)
-        {       const double x = mesh.v.at(0).coordinates.at(1);
-                const double y = mesh.v.at(0).coordinates.at(2);
-                const double z = mesh.v.at(0).coordinates.at(3);
-                const double e = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-                e > s ? s = e : s;
+        {       const double b1 = mesh.v.at(0).B.at(1);
+                const double b2 = mesh.v.at(0).B.at(2);
+                const double b3 = mesh.v.at(0).B.at(3);
+                const double d = sqrt(pow(b1, 2) + pow(b2, 2) + pow(b3, 2));
+                d > r ? r = d : r;
         }
-        return s;
+        return r;
 }
 
-void display(const Mesh& mesh, const double s)
+void display(const Mesh& mesh, const double r)
 {       
 }
 
@@ -51,10 +51,10 @@ int main(int argc, char* argv[])
         // nodelay(stdscr, TRUE);
         // keypad(stdscr, TRUE);
 
-        double s = bind(mesh);
+        const double r = bind(mesh);
         int ch;
         while((ch = getch()) != KEY_F(12))
-        {       display(mesh, s);
+        {       display(mesh, r);
         }
 
         finish(0);

@@ -2,21 +2,20 @@
 #define VERTEX_H
 
 #include <array>
+#include "vector.h"
 
-struct Vertex
-{       std::array<double, 3> coordinates;
-
-        // default constructor (implicitly defined)
-        Vertex() = default;
-
+struct Vertex : public Vector
+{       // default constructor
+        Vertex() : Vector() {}
+        
         // parameterised constructor
-        Vertex(const double x, const double y, const double z) : coordinates{x, y, z} {}
+        Vertex(const std::array<double, 3>& A) : Vector(O, A) {}
 
-        // copy constructor (implicitly defined)
-        Vertex(const Vertex&) = default;
+        // copy constructor
+        Vertex(const Vertex& other) : Vector(other) {}
 
-        // deconstructor (implicitly defined)
+        // destructor (implicitly defined)
         ~Vertex() = default;
 };
 
-#endif
+#endif // VERTEX_H

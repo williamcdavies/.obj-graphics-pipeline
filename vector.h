@@ -3,20 +3,23 @@
 
 #include <array>
 
-struct Vector
-{       std::array<double, 3> components;
+constexpr std::array<double, 3> O = {0, 0, 0};
 
-        // default constructor (implicitly defined)
-        Vector() = default;
+struct Vector
+{       std::array<double, 3> A;
+        std::array<double, 3> B;
+
+        // default constructor
+        Vector() : A(O), B(O) {}
 
         // parameterised constructor
-        Vector(const double i, const double j, const double k) : components{i, j, k} {}
+        Vector(const std::array<double, 3>& A, const std::array<double, 3>& B) : A(A), B(B) {}
 
         // copy constructor (implicitly defined)
         Vector(const Vector&) = default;
 
-        // deconstructor (implicitly defined)
+        // destructor (implicitly defined)
         ~Vector() = default;
 };
 
-#endif
+#endif // VECTOR_H

@@ -1,28 +1,28 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include "plane.h"
 #include "vertex.h"
 
 struct Mesh
 {       std::vector<Vertex> v;
-        std::vector<Vertex> f;
+        std::vector<std::array<unsigned int, 3>> f;
 
         // default constructor (implicitly defined)
         Mesh() = default;
 
         // parameterised constructor
-        Mesh(const std::vector<Vertex>& v, const std::vector<Vertex>& f) : v(v), f(f) {}
+        Mesh(const std::vector<Vertex>& v, const std::vector<std::array<unsigned int, 3>>& f) : v(v), f(f) {}
 
         // copy constructor (implicitly defined)
         Mesh(const Mesh&) = default;
 
-        // deconstructor (implicitly defined)
+        // destructor (implicitly defined)
         ~Mesh() = default;
 
         void load(std::ifstream&);
@@ -37,19 +37,19 @@ void Mesh::load(std::ifstream& in)
                         for(std::size_t i = 0; i < 3; ++i)
                         {       std::string str;
                                 iss >> str;
-                                vertex.coordinates.at(i) = stod(str);
+                                vertex.B.at(i) = stod(str);
                         }
                         v.push_back(vertex);
                 }
                 else if(line.substr(0, 2) == "f ")
                 {       std::istringstream iss(line.substr(2));
-                        Vertex vertex;
+                        std::array<unsigned int, 3> arr;
                         for(std::size_t i = 0; i < 3; ++i)
                         {       std::string str;
                                 iss >> str;
-                                vertex.coordinates.at(i) = stod(str);
+                                arr.at(i) = stod(str);
                         }
-                        f.push_back(vertex);
+                        f.push_back(arr);
                 }
         }
 }
