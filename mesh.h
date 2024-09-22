@@ -7,17 +7,17 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "vertex.h"
+#include "vector.h"
 
 struct Mesh
-{       std::vector<Vertex> v;
-        std::vector<std::array<unsigned int, 3>> f;
+{       std::vector<Vector> v;
+        std::vector<Vector> f;
 
         // default constructor (implicitly defined)
         Mesh() = default;
 
         // parameterised constructor
-        Mesh(const std::vector<Vertex>& v, const std::vector<std::array<unsigned int, 3>>& f) : v(v), f(f) {}
+        Mesh(const std::vector<Vector>& v, const std::vector<Vector>& f) : v(v), f(f) {}
 
         // copy constructor (implicitly defined)
         Mesh(const Mesh&) = default;
@@ -33,23 +33,17 @@ void Mesh::load(std::ifstream& in)
         while(std::getline(in, line))
         {       if(line.substr(0, 2) == "v ")
                 {       std::istringstream iss(line.substr(2));
-                        Vertex vertex;
-                        for(std::size_t i = 0; i < 3; ++i)
-                        {       std::string str;
-                                iss >> str;
-                                vertex.B.at(i) = stod(str);
-                        }
-                        v.push_back(vertex);
+                        std::string istr, jstr, kstr;
+                        iss >> istr >> jstr >> kstr;
+                        Vector vector(stod(istr), stod(jstr), stod(kstr));
+                        v.push_back(vector);
                 }
                 else if(line.substr(0, 2) == "f ")
                 {       std::istringstream iss(line.substr(2));
-                        std::array<unsigned int, 3> arr;
-                        for(std::size_t i = 0; i < 3; ++i)
-                        {       std::string str;
-                                iss >> str;
-                                arr.at(i) = stod(str);
-                        }
-                        f.push_back(arr);
+                        std::string istr, jstr, kstr;
+                        iss >> istr >> jstr >> kstr;
+                        Vector vector(stod(istr), stod(jstr), stod(kstr));
+                        f.push_back(vector);
                 }
         }
 }
